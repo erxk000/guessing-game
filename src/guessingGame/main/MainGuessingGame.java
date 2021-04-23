@@ -1,4 +1,4 @@
-package guessingGame.main;
+  package guessingGame.main;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -8,14 +8,12 @@ import java.util.Scanner;
 public class MainGuessingGame {
 
 	public static boolean gamewin = false;
-
-
-
+	static String nameInput;
+	
 	public static void main(String[] args) {
 		
 		//Initial game start 
 		GameStartup();
-
     }
 
 	//Game reset method that is called when you didn't guess correctly
@@ -33,8 +31,8 @@ public class MainGuessingGame {
 		int again = gameAgain.nextInt();
 
 		if (again == 1) {
-			Process();
-		} else if(again == 2) {
+			Process(nameInput);
+		} else if (again == 2) {
 			System.out.println("Maybe next time, have a nice day :)");
 		}
 
@@ -43,48 +41,48 @@ public class MainGuessingGame {
 		}
 	}
 
-	//Game initial Startup
-	public static void GameStartup() {
-
+	//Game initial Startup method
+	public static String GameStartup() {
+		
+		//creating scanner for new input
+		Scanner sc = new Scanner(System.in);
+		
 		//print out few welcoming lines
         System.out.println("Hi");
-        System.out.println("Let's play a guessing game");
+		System.out.println("What are you gonna call yourself?");
+
+		//creating string "nameInput" and tying it up with recently created scanner input "sc"
+		String nameInput = sc.nextLine();
+		
+        System.out.println("Let's play a guessing game " + nameInput);
         System.out.println("if you want to play press 1, if not press 2");
 
         // creating new user input and naming it "start"
        	Scanner start = new Scanner(System.in);
         
-
         //creating integer "getStart" and assigning it to "start", giving it integer input option
         int getStart = start.nextInt();
 		
-
-		
-		
-			
-      
         if (getStart == 1) {
 
-            Process();
+            Process(nameInput);
 
         } else {
 
             System.out.println();
-
         }
-
+		//returning our previously typed input, or : what are we gonna call ourselves
+		return nameInput;
 	}
 
-	//GAME process
-    public static void Process() {
+	//GAME process method, and using our stored nameInput from previous method
+    public static void Process(String nameInput) {
 
         Scanner start2 = new Scanner(System.in);
 
         //creating integer "max", giving it value 10
         int max = 10;
         
-
-
         System.out.println("lets play, I've created a random number from 0 to 10, you have to guess it, you have 3 guesses");
 
         //creating random variable, naming it "rndNum";
@@ -97,9 +95,9 @@ public class MainGuessingGame {
 		
         Scanner guess = new Scanner(System.in);
         
-        System.out.println("Whats your guess? ");
+        System.out.println("Whats your guess? " + GeneratedNum);
   
-		//Guessing Algorythm
+		//Guessing method
         do {
                 
             getGuess = guess.nextInt();
@@ -107,28 +105,23 @@ public class MainGuessingGame {
             //first scenario, when user types the right number
             if (getGuess == GeneratedNum) {
 
-				System.out.println("Nice job, the number was: " + GeneratedNum);
+				System.out.println("Nice job " + nameInput + ", the number was: " + GeneratedNum);
 				System.out.println("Thanx for playing our guessing game!");
-				System.out.print("Created and written by: \"PlayinFractured Industries\"");
-
-					
+				System.out.print("Created and written by: \"PlayinFractured tm\"");
+	
 				gamewin = true;
 					
-                break;
-
-                	
+                break; 	
 			}
 
 			//second scenario, when user types the wrong number and have more than 1 attempt left
             if (getGuess != GeneratedNum && attempts > 1)  {
 
                 System.out.println("Oooops, you have: " + (attempts - 1 ) + " attempts left");
-                
             }
 
             attempts -= 1;
-
-                	
+ 	
 			//third scenario, when user types the wrong number and have less than 1 attempt
             if (attempts < 1 && getGuess != GeneratedNum) {
 
@@ -137,17 +130,13 @@ public class MainGuessingGame {
 				System.out.println();
 				
                 break;
-				
-
             }
 
         } while (getGuess != GeneratedNum); 
 
-		//give you option to reset if you didn't guess correctly
+		//gives you option to reset if you didn't guess correctly
 		if (gamewin != true) {
 			GameReset();
 		} 
-
 	}
-
 }
