@@ -1,9 +1,7 @@
-  package guessingGame.main;
+package guessingGame.main;
 
 import java.util.Random;
 import java.util.Scanner;
-
-
 
 public class MainGuessingGame {
 
@@ -28,15 +26,19 @@ public class MainGuessingGame {
 		System.out.println();
 
 		Scanner gameAgain = new Scanner(System.in);
+
 		int again = gameAgain.nextInt();
 
 		if (again == 1) {
+
 			Process(nameInput);
+
 		} else if (again == 2) {
+
 			System.out.println("Maybe next time, have a nice day :)");
 		}
-
 		if (again != 1 && again != 2) {
+
 			System.out.println("I see you didn't stick to instructions... okay then");
 		}
 	}
@@ -71,7 +73,7 @@ public class MainGuessingGame {
 
             System.out.println();
         }
-		//returning our previously typed input, or : what are we gonna call ourselves
+		//returning our previously typed input, or : what we are going to call ourselves
 		return nameInput;
 	}
 
@@ -83,6 +85,7 @@ public class MainGuessingGame {
         //creating integer "max", giving it value 10
         int max = 10;
         
+		System.out.println();
         System.out.println("lets play, I've created a random number from 0 to 10, you have to guess it, you have 3 guesses");
 
         //creating random variable, naming it "rndNum";
@@ -95,9 +98,15 @@ public class MainGuessingGame {
 		
         Scanner guess = new Scanner(System.in);
         
-        System.out.println("Whats your guess? " + GeneratedNum);
+        System.out.println("Whats your guess? ");
   
-		//Guessing method
+		//Guessing method. I separated it into 3 scenarios... 
+		//1st, when number is guessed correctly at any point. 
+		//2nd, when number is guessed incorrectly and player has more than 1 attempt left.
+		//3rd, when number is guessed incorrectly and player has less than 1 attempt left.
+		/*scenario when player has 1 attempt is not necessary because, the moment that the player has 1 attempt, is when he is choosing his last guess, 
+		therefore right after choosing his last guess, number of attempts is less than 1 */
+		
         do {
                 
             getGuess = guess.nextInt();
